@@ -6,7 +6,6 @@ from streamlit_folium import st_folium
 import pandas as pd
 from datetime import datetime
 import s2sphere
-import os
 
 # --- Page Configuration ---
 st.set_page_config(layout="wide", page_title="Agri API Landscape Monitor")
@@ -17,7 +16,7 @@ st.title("🌱 Agricultural Landscape Monitor")
 st.sidebar.header("Configuration")
 
 # API Key Input (Use a secure way to handle keys in production)
-api_key_input = os.getenv("API_KEY_AGRI", "")
+api_key_input = st.secrets["API_KEY_AGRI"]
 # Fallback for demo purposes if user doesn't input one (Optional)
 # api_key = api_key_input if api_key_input else "YOUR_FALLBACK_KEY" 
 api_key = api_key_input
@@ -368,4 +367,5 @@ if st.session_state.geojson_data and st.session_state.latest_period:
                 mime="application/json"
             )
 else:
+
     st.info("👈 Enter your API key and S2 Cell ID, then click 'Fetch Data' to begin.")
